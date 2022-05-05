@@ -23,6 +23,7 @@ async function run() {
   try {
     await client.connect();
     const inventoryCollection = client.db("inventory").collection("product");
+    const serviceCollection = client.db("ourServise").collection("service");
 
     // loading all product
     app.get("/product", async (req, res) => {
@@ -30,6 +31,14 @@ async function run() {
       const cursor = inventoryCollection.find(query);
       const products = await cursor.toArray();
       res.send(products);
+    });
+
+    // loading all service
+    app.get("/service", async (req, res) => {
+      const query = {};
+      const cursor = serviceCollection.find(query);
+      const services = await cursor.toArray();
+      res.send(services);
     });
 
     //
