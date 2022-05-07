@@ -41,6 +41,14 @@ async function run() {
       res.send(product);
     });
 
+    // delete a user
+    app.delete("/product/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await inventoryCollection.deleteOne(query);
+      res.send(result);
+    });
+
     // loading all service
     app.get("/service", async (req, res) => {
       const query = {};
