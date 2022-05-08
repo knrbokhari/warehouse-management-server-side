@@ -53,26 +53,26 @@ async function run() {
     });
 
     // // loading all product
-    // app.get("/product", async (req, res) => {
-    //   const query = {};
-    //   const cursor = inventoryCollection.find(query);
-    //   const products = await cursor.toArray();
-    //   res.send(products);
-    // });
+    app.get("/product", async (req, res) => {
+      const query = { email: email };
+      const cursor = inventoryCollection.find(query);
+      const products = await cursor.toArray();
+      res.send(products);
+    });
 
     // find all product by email
-    app.get("/product", verifyJWT, async (req, res) => {
-      const decodedEmail = req.decoded.email;
-      const email = req.query.email;
-      if (email === decodedEmail) {
-        const query = { email: email };
-        const cursor = inventoryCollection.find(query);
-        const products = await cursor.toArray();
-        res.send(products);
-      } else {
-        res.status(403).send({ message: "forbidden access" });
-      }
-    });
+    // app.get("/product", async (req, res) => {
+    //   const decodedEmail = req.decoded.email;
+    //   const email = req.query.email;
+    //   if (email === decodedEmail) {
+    //     const query = { email: email };
+    //     const cursor = inventoryCollection.find(query);
+    //     const products = await cursor.toArray();
+    //     res.send(products);
+    //   } else {
+    //     res.status(403).send({ message: "forbidden access" });
+    //   }
+    // });
 
     // find one product
     app.get("/product/:id", async (req, res) => {
